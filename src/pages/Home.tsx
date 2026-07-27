@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Terminal, Sparkles, FolderGit2, Cpu, Globe, Smartphone, Zap } from 'lucide-react';
+import { ArrowRight, FolderGit2, Cpu, Globe, Smartphone } from 'lucide-react';
 import { PORTFOLIO_DATA, Project } from '../data/portfolioData';
 import { InteractiveTerminal } from '../components/InteractiveTerminal';
 
@@ -13,7 +13,6 @@ export const Home: React.FC<HomeProps> = ({ setActiveTab, onSelectProject }) => 
 
   return (
     <div>
-      {/* Hero Section */}
       <section className="hero-section">
         <div>
           <div className="badge-status">
@@ -22,12 +21,12 @@ export const Home: React.FC<HomeProps> = ({ setActiveTab, onSelectProject }) => 
           </div>
 
           <h1 className="hero-title">
-            Hi, I'm <span className="text-gradient-sky">Rogers</span> ⚡
+            Hi, I'm <span className="text-primary-color">Rogers</span>
           </h1>
-          
-          <h2 style={{ fontSize: '1.9rem', fontWeight: 800, color: 'var(--color-primary)', marginBottom: '18px' }}>
+
+          <p style={{ fontSize: '1.2rem', color: 'var(--color-primary)', fontWeight: 500, marginBottom: '16px', fontFamily: 'var(--font-sans)' }}>
             {PORTFOLIO_DATA.personal.title}
-          </h2>
+          </p>
 
           <p className="hero-subtitle">
             {PORTFOLIO_DATA.personal.tagline} {PORTFOLIO_DATA.personal.bio}
@@ -38,12 +37,11 @@ export const Home: React.FC<HomeProps> = ({ setActiveTab, onSelectProject }) => 
               <FolderGit2 size={18} /> Explore Projects <ArrowRight size={18} />
             </button>
             <button onClick={() => setActiveTab('contact')} className="btn-secondary">
-              Let's Connect & Talk Code
+              Let's Connect
             </button>
           </div>
         </div>
 
-        {/* Hero Quick Stats Grid */}
         <div className="hero-stats-grid">
           {PORTFOLIO_DATA.personal.stats.map((stat, idx) => (
             <div key={idx} className="stat-card">
@@ -54,8 +52,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveTab, onSelectProject }) => 
         </div>
       </section>
 
-      {/* Featured Projects Showcase */}
-      <section style={{ margin: '60px 0' }}>
+      <section style={{ margin: '80px 0' }}>
         <div className="section-header">
           <span className="section-tag">// Flagship Systems</span>
           <h2 className="section-title">Production Engineering Work</h2>
@@ -66,7 +63,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveTab, onSelectProject }) => 
             <div key={project.id} className="glass-panel project-card">
               <div className="project-header">
                 <span className="project-category-badge">{project.category}</span>
-                <span style={{ fontSize: '0.82rem', color: 'var(--color-primary)', fontFamily: 'var(--font-mono)' }}>
+                <span className="text-muted-color" style={{ fontSize: '0.8rem', fontFamily: 'var(--font-mono)' }}>
                   ★ {project.stars} Stars
                 </span>
               </div>
@@ -96,14 +93,13 @@ export const Home: React.FC<HomeProps> = ({ setActiveTab, onSelectProject }) => 
           ))}
         </div>
 
-        <div style={{ textAlign: 'center', marginTop: '40px' }}>
+        <div style={{ textAlign: 'center', marginTop: '48px' }}>
           <button onClick={() => setActiveTab('projects')} className="btn-secondary">
-            View All {PORTFOLIO_DATA.projects.length} Repositories & Demos <ArrowRight size={16} />
+            View All {PORTFOLIO_DATA.projects.length} Repositories <ArrowRight size={16} />
           </button>
         </div>
       </section>
 
-      {/* Core Expertise Overview */}
       <section style={{ margin: '80px 0' }}>
         <div className="section-header">
           <span className="section-tag">// Architectural Pillars</span>
@@ -113,34 +109,33 @@ export const Home: React.FC<HomeProps> = ({ setActiveTab, onSelectProject }) => 
         <div className="skills-grid">
           <div className="glass-panel skill-category-card">
             <div className="skill-category-title">
-              <Cpu style={{ color: 'var(--color-primary)' }} /> LLM Fine-Tuning & AI Agents
+              <Cpu className="text-primary-color" size={20} /> LLM Fine-Tuning & AI Agents
             </div>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: '1.7' }}>
+            <p className="text-muted-color" style={{ fontSize: '0.92rem', lineHeight: '1.7' }}>
               Fine-tuning pretrained models (LoRA/QLoRA), designing autonomous multi-agent tool execution loops, multimodal vision parsing, and vector search.
             </p>
           </div>
 
           <div className="glass-panel skill-category-card">
             <div className="skill-category-title">
-              <Smartphone style={{ color: 'var(--color-accent)' }} /> Cross-Platform Flutter Mobile
+              <Smartphone className="text-accent-color" size={20} /> Cross-Platform Flutter Mobile
             </div>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: '1.7' }}>
+            <p className="text-muted-color" style={{ fontSize: '0.92rem', lineHeight: '1.7' }}>
               60fps Flutter & Dart mobile applications with offline-first synchronization, custom platform channels, real-time WebSocket state management, and biometric security.
             </p>
           </div>
 
           <div className="glass-panel skill-category-card">
             <div className="skill-category-title">
-              <Globe style={{ color: 'var(--color-indigo)' }} /> Modern Full-Stack & Desktop Systems
+              <Globe className="text-primary-color" size={20} /> Modern Full-Stack & Desktop Systems
             </div>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: '1.7' }}>
+            <p className="text-muted-color" style={{ fontSize: '0.92rem', lineHeight: '1.7' }}>
               TypeScript, Next.js, React, Node.js REST APIs, Supabase real-time databases, and Electron desktop applications (Kodlama AI IDE).
             </p>
           </div>
         </div>
       </section>
 
-      {/* Interactive Developer CLI Terminal Preview */}
       <section style={{ margin: '80px 0' }}>
         <div className="section-header">
           <span className="section-tag">// Interactive Console</span>

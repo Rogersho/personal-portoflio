@@ -33,8 +33,8 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
       </div>
 
       {/* Filter Tabs & Search */}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '40px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'rgba(15, 23, 42, 0.7)', padding: '12px 20px', borderRadius: 'var(--radius-full)', border: '1px solid var(--border-glass)' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '40px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'rgba(255, 255, 255, 0.03)', padding: '12px 20px', borderRadius: 'var(--radius-full)', border: '1px solid var(--border-color)' }}>
           <Search size={20} style={{ color: 'var(--text-muted)' }} />
           <input
             type="text"
