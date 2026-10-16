@@ -7,7 +7,6 @@ import { ProjectModal } from './components/ProjectModal';
 import { Project } from './data/portfolioData';
 import { content } from './data/content';
 
-// Lazy-load page modules to avoid static analysis issues during build
 const Home = lazy(() => import('./pages/Home').then(m => ({ default: m.Home })));
 const Projects = lazy(() => import('./pages/Projects').then(m => ({ default: m.Projects })));
 const About = lazy(() => import('./pages/About').then(m => ({ default: m.About })));
@@ -109,28 +108,6 @@ export const App: React.FC = () => {
         <meta name="twitter:title" content={routeMeta.title} />
         <meta name="twitter:description" content={routeMeta.description} />
         <link rel="canonical" href={`https://rogerhodali.vercel.app${location.pathname}`} />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Person',
-            name: content.personal.name,
-            jobTitle: content.personal.title,
-            url: 'https://rogerhodali.vercel.app',
-            sameAs: [
-              content.personal.github,
-              content.personal.linkedin,
-              content.personal.companyWebsite
-            ],
-            knowsAbout: [
-              'Full Stack Development',
-              'Flutter',
-              'AI Agents',
-              'LLM Fine-Tuning',
-              'TypeScript',
-              'Product Leadership'
-            ]
-          })}
-        </script>
       </Helmet>
 
       <div className="app-layout">
