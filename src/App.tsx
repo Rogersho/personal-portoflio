@@ -76,11 +76,11 @@ export const Layout: React.FC = () => {
         <meta property="og:description" content={routeMeta.description} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://rogerhodali.vercel.app/og-image.png" />
+        <meta property="og:image" content={`${content.siteUrl}/og-image.png`} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={routeMeta.title} />
         <meta name="twitter:description" content={routeMeta.description} />
-        <meta name="twitter:image" content="https://rogerhodali.vercel.app/og-image.png" />
+        <meta name="twitter:image" content={`${content.siteUrl}/og-image.png`} />
         <link rel="canonical" href={canonicalUrl} />
         {location.pathname === '/' && (
           <script type="application/ld+json">

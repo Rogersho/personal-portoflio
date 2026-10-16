@@ -83,7 +83,7 @@ export interface ContentData {
 }
 
 export const content: ContentData = {
-  siteUrl: 'https://rogerhodali.vercel.app',
+  siteUrl: 'https://roger.nexastack.net',
   personal: {
     name: 'Roger Hodali',
     displayName: 'Rogers',
