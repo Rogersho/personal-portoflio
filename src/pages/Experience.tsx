@@ -1,5 +1,5 @@
 import React from 'react';
-import { PORTFOLIO_DATA } from '../data/portfolioData';
+import { content } from '../data/content';
 
 export const Experience: React.FC = () => {
   return (
@@ -14,7 +14,7 @@ export const Experience: React.FC = () => {
 
       <section style={{ marginBottom: '80px' }}>
         <div className="timeline-container">
-          {PORTFOLIO_DATA.timeline.map((item, idx) => (
+          {content.timeline.map((item, idx) => (
             <div key={idx} className="timeline-item">
               <div className="timeline-dot"></div>
               <div className="timeline-year">{item.year}</div>

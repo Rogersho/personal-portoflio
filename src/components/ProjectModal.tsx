@@ -1,6 +1,6 @@
 import React from 'react';
 import { X, ExternalLink, Github, CheckCircle2, Star, Sparkles } from 'lucide-react';
-import { Project } from '../data/portfolioData';
+import { Project } from '../data/content';
 
 interface ProjectModalProps {
   project: Project | null;

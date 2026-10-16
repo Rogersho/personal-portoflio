@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Github, Linkedin, Send, CheckCircle2, MapPin, Phone, Building2, ExternalLink } from 'lucide-react';
-import { PORTFOLIO_DATA } from '../data/portfolioData';
+import { content } from '../data/content';
 
 export const Contact: React.FC = () => {
   const [formState, setFormState] = useState({ name: '', email: '', subject: '', message: '' });
@@ -34,8 +34,8 @@ export const Contact: React.FC = () => {
                 </div>
                 <div>
                   <div style={{ fontSize: '0.78rem', color: 'var(--text-dim)' }}>Phone & WhatsApp</div>
-                  <a href={`tel:${PORTFOLIO_DATA.personal.phoneRaw}`} style={{ color: 'var(--text-primary)', fontWeight: 600, textDecoration: 'none', fontSize: '1rem' }}>
-                    {PORTFOLIO_DATA.personal.phone}
+                  <a href={`tel:${content.personal.phoneRaw}`} style={{ color: 'var(--text-primary)', fontWeight: 600, textDecoration: 'none', fontSize: '1rem' }}>
+                    {content.personal.phone}
                   </a>
                 </div>
               </div>
@@ -46,8 +46,8 @@ export const Contact: React.FC = () => {
                 </div>
                 <div>
                   <div style={{ fontSize: '0.78rem', color: 'var(--text-dim)' }}>Company</div>
-                  <a href={PORTFOLIO_DATA.personal.companyWebsite} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', fontWeight: 600, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                    {PORTFOLIO_DATA.personal.company} <ExternalLink size={14} />
+                  <a href={content.personal.companyWebsite} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', fontWeight: 600, textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                    {content.personal.company} <ExternalLink size={14} />
                   </a>
                 </div>
               </div>
@@ -58,7 +58,7 @@ export const Contact: React.FC = () => {
                 </div>
                 <div>
                   <div style={{ fontSize: '0.78rem', color: 'var(--text-dim)' }}>LinkedIn</div>
-                  <a href={PORTFOLIO_DATA.personal.linkedin} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', fontWeight: 500, textDecoration: 'none' }}>
+                  <a href={content.personal.linkedin} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', fontWeight: 500, textDecoration: 'none' }}>
                     Roger Hodali on LinkedIn
                   </a>
                 </div>
@@ -70,7 +70,7 @@ export const Contact: React.FC = () => {
                 </div>
                 <div>
                   <div style={{ fontSize: '0.78rem', color: 'var(--text-dim)' }}>GitHub</div>
-                  <a href={PORTFOLIO_DATA.personal.github} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', fontWeight: 500, textDecoration: 'none' }}>
+                  <a href={content.personal.github} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', fontWeight: 500, textDecoration: 'none' }}>
                     github.com/Rogersho
                   </a>
                 </div>
@@ -83,7 +83,7 @@ export const Contact: React.FC = () => {
                 <div>
                   <div style={{ fontSize: '0.78rem', color: 'var(--text-dim)' }}>Location</div>
                   <div style={{ color: 'var(--text-primary)', fontWeight: 500 }}>
-                    {PORTFOLIO_DATA.personal.location}
+                    {content.personal.location}
                   </div>
                 </div>
               </div>

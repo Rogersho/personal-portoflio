@@ -1,6 +1,6 @@
 import React from 'react';
 import { User, CheckCircle2, Cpu, Code2, GraduationCap, Building2 } from 'lucide-react';
-import { PORTFOLIO_DATA } from '../data/portfolioData';
+import { content } from '../data/content';
 
 export const About: React.FC = () => {
   return (
@@ -19,17 +19,17 @@ export const About: React.FC = () => {
             <User size={20} /> Executive Profile
           </h3>
           <p className="text-muted-color" style={{ lineHeight: '1.8', fontSize: '0.95rem' }}>
-            {PORTFOLIO_DATA.personal.bio}
+            {content.personal.bio}
           </p>
 
           <div style={{ marginTop: '24px', paddingTop: '20px', borderTop: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column', gap: '12px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.9rem', color: 'var(--text-primary)' }}>
               <Building2 size={18} className="text-primary-color" />
-              <span><strong>Company:</strong> CEO @ <a href={PORTFOLIO_DATA.personal.companyWebsite} target="_blank" rel="noopener noreferrer" className="text-primary-color" style={{ textDecoration: 'none' }}>NEXA STACK LTD</a></span>
+              <span><strong>Company:</strong> CEO @ <a href={content.personal.companyWebsite} target="_blank" rel="noopener noreferrer" className="text-primary-color" style={{ textDecoration: 'none' }}>NEXA STACK LTD</a></span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.9rem', color: 'var(--text-primary)' }}>
               <GraduationCap size={18} className="text-accent-color" />
-              <span><strong>Education:</strong> {PORTFOLIO_DATA.personal.education}</span>
+              <span><strong>Education:</strong> {content.personal.education}</span>
             </div>
           </div>
         </div>
@@ -68,7 +68,7 @@ export const About: React.FC = () => {
         </div>
 
         <div className="skills-grid">
-          {PORTFOLIO_DATA.skillCategories.map((category, catIdx) => (
+          {content.skillCategories.map((category, catIdx) => (
             <div key={catIdx} className="glass-panel skill-category-card">
               <h3 className="skill-category-title">
                 <Code2 size={18} className="text-primary-color" /> {category.title}
@@ -102,7 +102,7 @@ export const About: React.FC = () => {
         </div>
 
         <div className="timeline-container">
-          {PORTFOLIO_DATA.timeline.map((item, idx) => (
+          {content.timeline.map((item, idx) => (
             <div key={idx} className="timeline-item">
               <div className="timeline-dot"></div>
               <div className="timeline-year">{item.year}</div>

@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
-import { ArrowRight, Search, Star, ExternalLink, Github, Filter, Sparkles } from 'lucide-react';
-import { PORTFOLIO_DATA, Project } from '../data/portfolioData';
+import { useOutletContext } from 'react-router-dom';
+import { ArrowRight, Search, Github } from 'lucide-react';
+import { content, Project } from '../data/content';
 
 interface ProjectsProps {
-  onSelectProject: (project: Project) => void;
+  onSelectProject?: (project: Project) => void;
 }
 
-export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
+export const Projects: React.FC<ProjectsProps> = ({ onSelectProject: propOnSelectProject }) => {
+  const outlet = useOutletContext<{ onSelectProject?: (project: Project) => void }>() || {};
+  const onSelectProject = propOnSelectProject || outlet.onSelectProject || (() => {});
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   const categories = ['All', 'AI & ML', 'Mobile Apps', 'Full-Stack', 'Developer Tools'];
 
-  const filteredProjects = PORTFOLIO_DATA.projects.filter((project) => {
+  const filteredProjects = content.projects.filter((project) => {
     const matchesCategory = selectedCategory === 'All' || project.category === selectedCategory;
     const matchesSearch =
       project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||

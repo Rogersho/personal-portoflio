@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Terminal as TerminalIcon, CornerDownLeft } from 'lucide-react';
-import { PORTFOLIO_DATA } from '../data/portfolioData';
+import { content } from '../data/content';
 
 interface HistoryItem {
   command: string;
@@ -53,17 +53,17 @@ export const InteractiveTerminal: React.FC = () => {
         break;
 
       case 'whoami':
-        outputResult = PORTFOLIO_DATA.terminalCommands.whoami;
+        outputResult = content.terminalCommands.whoami;
         break;
 
       case 'skills':
-        outputResult = PORTFOLIO_DATA.terminalCommands.skills;
+        outputResult = content.terminalCommands.skills;
         break;
 
       case 'projects':
         outputResult = (
           <div>
-            <div>🚀 {PORTFOLIO_DATA.terminalCommands.projects}</div>
+            <div>🚀 {content.terminalCommands.projects}</div>
             <div style={{ marginTop: '6px', fontSize: '0.85rem', color: 'var(--text-muted)' }}>
               Tip: Switch to the Projects tab for category filtering and full metrics!
             </div>
@@ -72,11 +72,11 @@ export const InteractiveTerminal: React.FC = () => {
         break;
 
       case 'contact':
-        outputResult = PORTFOLIO_DATA.terminalCommands.contact;
+        outputResult = content.terminalCommands.contact;
         break;
 
       case 'quote':
-        outputResult = PORTFOLIO_DATA.terminalCommands.quote;
+        outputResult = content.terminalCommands.quote;
         break;
 
       case 'clear':

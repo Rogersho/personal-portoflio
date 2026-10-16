@@ -1,15 +1,19 @@
 import React from 'react';
+import { useOutletContext } from 'react-router-dom';
 import { ArrowRight, FolderGit2, Cpu, Globe, Smartphone } from 'lucide-react';
-import { PORTFOLIO_DATA, Project } from '../data/portfolioData';
+import { content, Project } from '../data/content';
 import { InteractiveTerminal } from '../components/InteractiveTerminal';
 
 interface HomeProps {
-  setActiveTab: (tab: string) => void;
-  onSelectProject: (project: Project) => void;
+  setActiveTab?: (tab: string) => void;
+  onSelectProject?: (project: Project) => void;
 }
 
-export const Home: React.FC<HomeProps> = ({ setActiveTab, onSelectProject }) => {
-  const featuredProjects = PORTFOLIO_DATA.projects.filter((p) => p.featured);
+export const Home: React.FC<HomeProps> = ({ setActiveTab: propSetActiveTab, onSelectProject: propOnSelectProject }) => {
+  const outlet = useOutletContext<{ setActiveTab?: (tab: string) => void; onSelectProject?: (project: Project) => void }>() || {};
+  const setActiveTab = propSetActiveTab || outlet.setActiveTab || (() => {});
+  const onSelectProject = propOnSelectProject || outlet.onSelectProject || (() => {});
+  const featuredProjects = content.projects.filter((p) => p.featured);
 
   return (
     <div>
@@ -17,7 +21,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveTab, onSelectProject }) => 
         <div>
           <div className="badge-status">
             <span className="pulse-dot"></span>
-            {PORTFOLIO_DATA.personal.statusBadge}
+            {content.personal.statusBadge}
           </div>
 
           <h1 className="hero-title">
@@ -25,11 +29,11 @@ export const Home: React.FC<HomeProps> = ({ setActiveTab, onSelectProject }) => 
           </h1>
 
           <p style={{ fontSize: '1.2rem', color: 'var(--color-primary)', fontWeight: 500, marginBottom: '16px', fontFamily: 'var(--font-sans)' }}>
-            {PORTFOLIO_DATA.personal.title}
+            {content.personal.title}
           </p>
 
           <p className="hero-subtitle">
-            {PORTFOLIO_DATA.personal.tagline} {PORTFOLIO_DATA.personal.bio}
+            {content.personal.tagline} {content.personal.bio}
           </p>
 
           <div className="hero-cta">
@@ -43,7 +47,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveTab, onSelectProject }) => 
         </div>
 
         <div className="hero-stats-grid">
-          {PORTFOLIO_DATA.personal.stats.map((stat, idx) => (
+          {content.personal.stats.map((stat, idx) => (
             <div key={idx} className="stat-card">
               <div className="stat-value">{stat.value}</div>
               <div className="stat-label">{stat.label}</div>
@@ -95,7 +99,7 @@ export const Home: React.FC<HomeProps> = ({ setActiveTab, onSelectProject }) => 
 
         <div style={{ textAlign: 'center', marginTop: '48px' }}>
           <button onClick={() => setActiveTab('projects')} className="btn-secondary">
-            View All {PORTFOLIO_DATA.projects.length} Repositories <ArrowRight size={16} />
+            View All {content.projects.length} Repositories <ArrowRight size={16} />
           </button>
         </div>
       </section>
