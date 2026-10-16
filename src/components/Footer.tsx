@@ -1,67 +1,67 @@
-import React from 'react';
-import { Github, Linkedin, Phone, ExternalLink } from 'lucide-react';
+import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
+import { Terminal, Code2, Menu, X, Sparkles, FolderGit2, User, Mail } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../data/portfolioData';
 
-interface FooterProps {
+interface NavbarProps {
+  activeTab: string;
   setActiveTab: (tab: string) => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ setActiveTab }) => {
+export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const navItems = [
+    { id: 'home', label: 'Home', icon: Sparkles, to: '/' },
+    { id: 'projects', label: 'Projects', icon: FolderGit2, to: '/projects' },
+    { id: 'experience', label: 'Experience', icon: User, to: '/experience' },
+    { id: 'about', label: 'About & Skills', icon: User, to: '/about' },
+    { id: 'contact', label: 'Contact', icon: Mail, to: '/contact' },
+    { id: 'cv', label: 'CV', icon: Terminal, to: '/cv' }
+  ];
+
+  const handleNavClick = (id: string) => {
+    setActiveTab(id);
+    setMobileMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <footer className="footer">
-      <div className="footer-container">
-        <div>
-          <div style={{ fontWeight: 700, fontSize: '1.15rem', fontFamily: 'var(--font-heading)', marginBottom: '6px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            {PORTFOLIO_DATA.personal.name}
-            <span className="text-primary-color" style={{ fontSize: '0.78rem', fontWeight: 600, fontFamily: 'var(--font-sans)', padding: '2px 10px', background: 'var(--color-primary-dim)', border: '1px solid var(--border-primary)', borderRadius: '99px' }}>
-              CEO @ NEXA STACK LTD
-            </span>
+    <nav className="navbar">
+      <div className="navbar-container">
+        <NavLink to="/" onClick={() => handleNavClick('home')} className="nav-brand">
+          <div className="nav-brand-logo">
+            <Code2 size={22} />
           </div>
-          <p className="text-muted-color" style={{ fontSize: '0.88rem', maxWidth: '420px', lineHeight: '1.6' }}>
-            {PORTFOLIO_DATA.personal.tagline}
-          </p>
+          <span>{PORTFOLIO_DATA.personal.name}<span style={{ color: 'var(--color-primary)' }}>.dev</span></span>
+        </NavLink>
+
+        <div className={`nav-links ${mobileMenuOpen ? 'mobile-open' : ''}`}>
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            return (
+              <NavLink
+                key={item.id}
+                to={item.to}
+                onClick={() => handleNavClick(item.id)}
+                className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
+                style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+              >
+                <Icon size={16} />
+                <span>{item.label}</span>
+              </NavLink>
+            );
+          })}
         </div>
 
-        <div className="social-links">
-          <a
-            href={`tel:${PORTFOLIO_DATA.personal.phoneRaw}`}
-            className="social-icon-btn"
-            title="Call / WhatsApp"
-          >
-            <Phone size={18} />
-          </a>
-          <a
-            href={PORTFOLIO_DATA.personal.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="social-icon-btn"
-            title="GitHub Profile"
-          >
-            <Github size={18} />
-          </a>
-          <a
-            href={PORTFOLIO_DATA.personal.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="social-icon-btn"
-            title="LinkedIn Profile"
-          >
-            <Linkedin size={18} />
-          </a>
-          <a
-            href={PORTFOLIO_DATA.personal.companyWebsite}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="social-icon-btn"
-            title="NEXA STACK LTD"
-          >
-            <ExternalLink size={18} />
-          </a>
-        </div>
+        <button
+          className="mobile-menu-btn"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle navigation menu"
+        >
+          {mobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
+        </button>
       </div>
-      <div className="text-dim-color" style={{ textAlign: 'center', marginTop: '28px', fontSize: '0.82rem' }}>
-        © {new Date().getFullYear()} Roger Hodali (NEXA STACK LTD). All rights reserved.
-      </div>
-    </footer>
+    </nav>
   );
 };
