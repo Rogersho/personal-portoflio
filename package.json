@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "vite build && react-snap",
+    "build": "vite-ssg build",
     "preview": "vite preview --host 0.0.0.0"
   },
   "dependencies": {
@@ -13,8 +13,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet-async": "^2.0.1",
-    "react-router-dom": "^6.28.0",
-    "react-snap": "^1.26.0"
+    "react-router-dom": "^6.14.1",
+    "vite-ssg": "^0.19.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
@@ -22,21 +22,5 @@
     "@vitejs/plugin-react": "^4.2.1",
     "typescript": "^5.2.2",
     "vite": "^5.1.6"
-  },
-  "reactSnap": {
-    "source": "dist",
-    "include": [
-      "/",
-      "/projects",
-      "/experience",
-      "/about",
-      "/contact",
-      "/cv"
-    ],
-    "fixWebpackChunksIssue": false,
-    "minifyHtml": {
-      "collapseWhitespace": false,
-      "removeComments": false
-    }
   }
 }
