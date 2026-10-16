@@ -2,7 +2,10 @@ import { defineConfig, Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { generateCVText, generateCVMarkdown } from './src/data/cvGenerator';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function cvGeneratorPlugin(): Plugin {
   return {
