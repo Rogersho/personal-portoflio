@@ -1,19 +1,18 @@
-import React, { useCallback, useEffect, useState, Suspense, lazy } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { useLocation, useNavigate, Routes, Route } from 'react-router-dom';
+import React, { useCallback, useEffect, useState } from 'react';
+import type { RouteRecord } from 'vite-react-ssg';
+import { Head } from 'vite-react-ssg';
+import { useLocation, useNavigate, Outlet } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { ProjectModal } from './components/ProjectModal';
-import { Project } from './data/portfolioData';
-import { content } from './data/content';
-
-const Home = lazy(() => import('./pages/Home').then(m => ({ default: m.Home })));
-const Projects = lazy(() => import('./pages/Projects').then(m => ({ default: m.Projects })));
-const About = lazy(() => import('./pages/About').then(m => ({ default: m.About })));
-const Contact = lazy(() => import('./pages/Contact').then(m => ({ default: m.Contact })));
-const Experience = lazy(() => import('./pages/Experience').then(m => ({ default: m.Experience })));
-const CVPage = lazy(() => import('./pages/CVPage').then(m => ({ default: m.CVPage })));
-const NotFound = lazy(() => import('./pages/NotFound').then(m => ({ default: m.NotFound })));
+import { Home } from './pages/Home';
+import { Projects } from './pages/Projects';
+import { Experience } from './pages/Experience';
+import { About } from './pages/About';
+import { Contact } from './pages/Contact';
+import { CVPage } from './pages/CVPage';
+import { NotFound } from './pages/NotFound';
+import { content, Project } from './data/content';
 
 const pathForTab = (tab: string): string => {
   switch (tab) {
@@ -41,34 +40,7 @@ const tabForPath = (pathname: string): string => {
   return 'home';
 };
 
-const metaByPath: Record<string, { title: string; description: string }> = {
-  '/': {
-    title: 'Roger Hodali | Full-Stack & AI Architect',
-    description: 'Portfolio of Roger Hodali — CEO of NEXA STACK LTD, AI architect, full-stack engineer, and Flutter specialist.'
-  },
-  '/projects': {
-    title: 'Projects | Roger Hodali',
-    description: 'Explore Rogers projects across AI, healthcare, developer tools, and mobile platforms.'
-  },
-  '/experience': {
-    title: 'Experience | Roger Hodali',
-    description: 'Professional experience, leadership roles, and academic journey of Roger Hodali.'
-  },
-  '/about': {
-    title: 'About | Roger Hodali',
-    description: 'Learn about Roger Hodali, his technical skills, career path, and leadership work.'
-  },
-  '/contact': {
-    title: 'Contact | Roger Hodali',
-    description: 'Get in touch with Roger Hodali for consulting, collaborations, and engineering opportunities.'
-  },
-  '/cv': {
-    title: 'CV | Roger Hodali',
-    description: 'Download or print Roger Hodali’s professional CV and experience summary.'
-  }
-};
-
-export const App: React.FC = () => {
+export const Layout: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -92,39 +64,64 @@ export const App: React.FC = () => {
     [location.pathname, navigate]
   );
 
-  const routeMeta = metaByPath[location.pathname] ?? metaByPath['/'];
+  const routeMeta = content.seoByPath[location.pathname] ?? content.seoByPath['/'];
+  const canonicalUrl = `${content.siteUrl}${location.pathname === '/' ? '' : location.pathname}`;
 
   return (
     <>
-      <Helmet>
+      <Head>
         <title>{routeMeta.title}</title>
         <meta name="description" content={routeMeta.description} />
         <meta property="og:title" content={routeMeta.title} />
         <meta property="og:description" content={routeMeta.description} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={`https://rogerhodali.vercel.app${location.pathname}`} />
+        <meta property="og:url" content={canonicalUrl} />
         <meta property="og:image" content="https://rogerhodali.vercel.app/og-image.png" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={routeMeta.title} />
         <meta name="twitter:description" content={routeMeta.description} />
-        <link rel="canonical" href={`https://rogerhodali.vercel.app${location.pathname}`} />
-      </Helmet>
+        <meta name="twitter:image" content="https://rogerhodali.vercel.app/og-image.png" />
+        <link rel="canonical" href={canonicalUrl} />
+        {location.pathname === '/' && (
+          <script type="application/ld+json">
+            {JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Person',
+              name: content.personal.name,
+              jobTitle: content.personal.title,
+              url: content.siteUrl,
+              sameAs: [
+                content.personal.github,
+                content.personal.linkedin,
+                content.personal.companyWebsite
+              ],
+              knowsAbout: [
+                'Full-Stack Web Development',
+                'Flutter Mobile Architecture',
+                'Autonomous AI Agents',
+                'LLM Fine-Tuning (LoRA / QLoRA)',
+                'TypeScript & Node.js',
+                'Computational Mathematics & Algorithms'
+              ],
+              worksFor: {
+                '@type': 'Organization',
+                name: content.personal.company,
+                url: content.personal.companyWebsite
+              },
+              alumniOf: {
+                '@type': 'EducationalOrganization',
+                name: 'University of Rwanda'
+              }
+            })}
+          </script>
+        )}
+      </Head>
 
       <div className="app-layout">
         <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
 
         <main className="main-content">
-          <Suspense fallback={<div style={{ padding: '40px', textAlign: 'center' }}>Loading...</div>}>
-            <Routes>
-              <Route path="/" element={<Home setActiveTab={setActiveTab} onSelectProject={setSelectedProject} />} />
-              <Route path="/projects" element={<Projects onSelectProject={setSelectedProject} />} />
-              <Route path="/experience" element={<Experience />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/cv" element={<CVPage />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
+          <Outlet context={{ onSelectProject: setSelectedProject, setActiveTab }} />
         </main>
 
         <Footer setActiveTab={setActiveTab} />
@@ -134,4 +131,22 @@ export const App: React.FC = () => {
   );
 };
 
-export default App;
+export const routes: RouteRecord[] = [
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: 'projects', element: <Projects /> },
+      { path: 'experience', element: <Experience /> },
+      { path: 'about', element: <About /> },
+      { path: 'contact', element: <Contact /> },
+      { path: 'cv', element: <CVPage /> },
+      { path: '404', element: <NotFound /> },
+      { path: '*', element: <NotFound /> }
+    ]
+  }
+];
+
+export const App = Layout;
+export default Layout;
